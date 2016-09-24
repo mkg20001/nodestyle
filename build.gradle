@@ -3,7 +3,8 @@ version '0.0.1'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -11,9 +12,26 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    //compile
 }
 
-apply plugin: 'java'
+jar {
+    manifest {
+        attributes 'License': 'GPL-3.0'
+    }
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'NodeStyle - NodeJS like APIs for Java',
+                'Implementation-Version': version
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+
 test {
     // enable TestNG support (default is JUnit)
     useTestNG()

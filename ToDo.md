@@ -31,7 +31,7 @@ All the node things:
  - String Decoder
  - Timers
  - TLS/SSL
- - TY
+ - TTY
  - UDP/Datagram
  - URL
  - Utilities
@@ -40,10 +40,13 @@ All the node things:
  - ZLIB
 
 Finished:
+(none)
+
+Beta:
+ - Console
  - Events
 
 WIP:
- - Console
  - File System
  - Path
 
