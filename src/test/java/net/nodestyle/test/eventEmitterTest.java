@@ -158,7 +158,25 @@ public class eventEmitterTest {
 
     @Test
     public void removeListener() throws Exception {
-        //WIP
+        e.removeAllListeners();
+        count=0;
+        EventListener el=new EventListener() {
+            @Override
+            public void onEvent(Object... o) {
+                assertEquals("should not be executed",true,false);
+            }
+        };
+        EventListener el2=new EventListener() {
+            @Override
+            public void onEvent(Object... o) {
+                count++;
+            }
+        };
+        e.on("test", el);
+        e.on("test",el2);
+        e.removeListener("test",el);
+        e.emit("test");
+        assertEquals("count is 1","1",count.toString());
     }
 
     @Test

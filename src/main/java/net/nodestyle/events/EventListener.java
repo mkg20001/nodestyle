@@ -17,6 +17,12 @@
  */
 package net.nodestyle.events;
 
+import java.util.UUID;
+
 public abstract class EventListener {
+    public final UUID listenerId = UUID.randomUUID();
     public abstract void onEvent(java.lang.Object... o);
+    public String toString() {
+        return "EventListener: "+listenerId.toString();
+    }
 }

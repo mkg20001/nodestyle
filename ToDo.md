@@ -43,8 +43,10 @@ Finished:
 (none)
 
 Beta:
- - Console
  - Events
+
+Alpha:
+ - Console
 
 WIP:
  - File System

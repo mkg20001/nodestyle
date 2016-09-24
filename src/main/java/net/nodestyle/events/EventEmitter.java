@@ -24,6 +24,7 @@ import net.nodestyle.helper.Warn;
 public class EventEmitter {
     private Object o=new Object();
     private Object once=new Object();
+    private Object lisID=new Object(); //ID => event
     private Integer max=10;
 
     private Array getArray(String name) {
@@ -31,6 +32,19 @@ public class EventEmitter {
             o.set(name,new Array<EventListener>());
         }
         return (Array) o.get(name);
+    }
+
+    private EventEmitter register(String name,EventListener e) {
+        checkLeak(name);
+        lisID.set(e.listenerId.toString(),name);
+        emit("newListener",name,e);
+        return this;
+    }
+
+    private EventEmitter unregister(EventListener e) {
+        String event=(String) lisID.get(e.listenerId.toString());
+        emit("removeListener",event,e);
+        return this;
     }
 
     private Array getOnce(String name) {
@@ -53,8 +67,7 @@ public class EventEmitter {
 
     public EventEmitter addListener(String name,EventListener e) {
         getArray(name).push(e);
-        checkLeak(name);
-        return this;
+        return register(name,e);
     }
 
     public void emit(String name,java.lang.Object... o) {
@@ -81,40 +94,51 @@ public class EventEmitter {
     }
 
     public EventEmitter on(String name,EventListener e) {
-        getArray(name).push(e);
-        checkLeak(name);
-        return this;
+        return addListener(name,e);
     }
 
     public EventEmitter once(String name,EventListener e) {
         getOnce(name).push(e);
-        checkLeak(name);
-        return this;
+        return register(name,e);
     }
 
     public EventEmitter prependListener(String name,EventListener e) {
         getArray(name).shift(e);
-        checkLeak(name);
-        return this;
+        return register(name,e);
     }
 
     public EventEmitter prependOnceListener(String name,EventListener e) {
         getOnce(name).shift(e);
-        checkLeak(name);
-        return this;
+        return register(name,e);
     }
 
     public EventEmitter removeAllListeners() {
+        for (String name:eventNames())
+            for (EventListener el : listeners(name))
+                unregister(el);
         o=new Object();
         once=new Object();
         return this;
     }
 
-    public EventEmitter removeListener(String name) {
-        for (Object a:new Object[]{o,once}) {
-            a.del(name);
+    public EventEmitter removeListener(String name,EventListener e) {
+        if (lisID.get(e.listenerId.toString()) == null) return this;
+        for (Object ob:new Object[]{o,once}) {
+            if (ob.get(name)!=null) {
+                Array a=new Array();
+                Array b=(Array) ob.get(name);
+                for (java.lang.Object b2:b.getItems()) {
+                    EventListener el=(EventListener) b2;
+                    if (!el.listenerId.toString().equalsIgnoreCase(e.listenerId.toString())) a.push(el);
+                }
+                ob.set(name,a);
+            }
         }
-        return this;
+        return unregister(e);
+    }
+
+    public EventEmitter removeListener(EventListener e) {
+        if (lisID.get(e.listenerId.toString()) == null) return this; else return removeListener((String) lisID.get(e.listenerId.toString()),e);
     }
 
     public EventEmitter setMaxListeners(Integer n) {

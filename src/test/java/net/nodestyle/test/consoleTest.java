@@ -28,27 +28,17 @@ import java.io.PrintStream;
 import static org.junit.Assert.*;
 
 public class consoleTest {
-//    Console c=new Console();
-    // TODO: 24.09.16 add stream first 
-
-    @Before
-    public void setUp() throws Exception {
-        Log.log("init");
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Log.log("after");
-    }
+    // Console c=new Console();
+    // TODO: 24.09.16 add stream first
 
     @Test
     public void dir() throws Exception {
-        Log.log("d");
+
     }
 
     @Test
     public void error() throws Exception {
-        Log.log("d");
+
     }
 
     @Test
