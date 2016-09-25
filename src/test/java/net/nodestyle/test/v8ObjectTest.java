@@ -56,6 +56,6 @@ public class v8ObjectTest {
         o.clear();
         o.set("test.1",true);
         o.set("test2","hi");
-        assertEquals("contains test2 and test.1",new String[]{"test.1","test2"},o.list());
+        assertArrayEquals("contains test2 and test.1",new String[]{"test.1","test2"},o.list());
     }
 }

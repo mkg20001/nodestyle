@@ -66,8 +66,7 @@ task fatJar(type: Jar) {
 
 
 test {
-    // enable TestNG support (default is JUnit)
-    useTestNG()
+    dependsOn 'cleanTest'
 
     // set a system property for the test JVM(s)
     //systemProperty 'some.prop', 'value'
