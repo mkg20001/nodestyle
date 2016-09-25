@@ -51,7 +51,6 @@ public class eventEmitterTest {
         e.emit("test",true);
         e.emit("test",true);
         assertEquals("count is 2","2",count.toString());
-        assertEquals("test is anything fails?!","1",count.toString());
     }
 
     @Test
