@@ -19,8 +19,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="net.nodestyle_main" target="1.8" />
-      <module name="net.nodestyle_test" target="1.8" />
+      <module name="net.nodestyle_main" target="1.7" />
+      <module name="net.nodestyle_test" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
