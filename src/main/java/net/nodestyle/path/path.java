@@ -21,7 +21,7 @@ import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.sun.javafx.PlatformUtil.isWindows;
+import static net.nodestyle.helper.OS.isWindows;
 
 class Helper {
     public static String unixSeperator="/";
