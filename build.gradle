@@ -56,6 +56,7 @@ license {
 }
 
 assemble.dependsOn().remove(license)
+assemble.dependsOn().remove(licenseMain)
 
 task fatJar(type: Jar) {
     manifest {
