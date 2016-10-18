@@ -46,7 +46,7 @@ publishing {
 
 license {
     header new File('./HEADER' )
-    strictCheck true
+    strictCheck false
     mapping {
         javascript='JAVADOC_STYLE'
     }
