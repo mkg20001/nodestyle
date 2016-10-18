@@ -55,6 +55,8 @@ license {
     ext.email = 'mkg20001@gmail.com'
 }
 
+assemble.dependsOn().remove(license)
+
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'NodeStyle - NodeJS like APIs for Java',
