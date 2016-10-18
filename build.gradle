@@ -43,8 +43,9 @@ publishing {
     }
 }
 
+
 license {
-    header rootProject.file('HEADER')
+    header new File('./HEADER' )
     strictCheck true
     mapping {
         javascript='JAVADOC_STYLE'
