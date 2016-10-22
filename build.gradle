@@ -13,6 +13,12 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 
+def sources = [
+        "net/nodestyle/events/**",
+        "net/nodestyle/helper/**",
+        "net/nodestyle/path/**",
+]
+
 repositories {
     mavenCentral()
 }
@@ -23,13 +29,31 @@ dependencies {
 }
 
 jar {
+    include sources
     manifest {
         attributes 'License': 'GPL-3.0'
     }
 }
 
 task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
+    from sources
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sources
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives jar
+    archives sourceJar
 }
 
 publishing {
@@ -74,6 +98,7 @@ test {
 
     // explicitly include or exclude tests
     include 'net/nodestyle/test/**'
+    include 'net/nodestyle/**'
     //exclude 'org/boo/**'
 
     // show standard out and standard error of the test JVM(s) on the console
