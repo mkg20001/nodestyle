@@ -3,7 +3,7 @@ jdk:
   - oraclejdk7
   - openjdk7
 language: java
-script: ./gradlew test
+script: ./gradlew clean test build
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -f  $HOME/.gradle/caches/modules-3/modules-3.lock
