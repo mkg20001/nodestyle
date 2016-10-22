@@ -35,10 +35,6 @@ jar {
     }
 }
 
-task sourceJar(type: Jar) {
-    from sources
-}
-
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sources
@@ -52,8 +48,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives sourcesJar
     archives javadocJar
-    archives jar
-    archives sourceJar
 }
 
 publishing {
@@ -63,7 +57,7 @@ publishing {
             artifactId 'nodestyle'
             version '0.0.1'
 
-            artifact sourceJar
+            artifact sourcesJar
         }
     }
 }
